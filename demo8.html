@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mutations</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.cjs.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vuex/4.0.0-rc.1/vuex.cjs.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{this.$store.getters}}</p>
+    <p>{{this.$store.getters.doneTodosCount}}</p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        todos: [
+          { id: 1, text: '我已完成', done: true },
+          { id: 2, text: '我没有完成', done: false }
+        ]
+      },
+      getters: {
+        doneTodos: state => {
+          return state.todos.filter(todo => todo.done)
+        },
+        doneTodosCount: (state, getters) => {
+          return getters.doneTodos.length
+        }
+      }
+    });
+    const vm = new Vue({
+      el: '#app',
+      store
+    });
+  </script>
+</body>
+
+</html>
