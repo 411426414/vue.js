@@ -24,12 +24,14 @@
             },
             mutations: {
                 receive(state, param) {
+                    // 查看接收到的param值
+                    console.log(param);
                     state.param = param
                 }
             },
             actions: {
                 param(context) {
-                    context.commit('receive', '我是传递的参数')
+                    context.commit({type: 'receive', name: '我是传递的参数'})
                 }
             }
         });
