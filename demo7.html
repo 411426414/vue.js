@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mutations</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.cjs.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vuex/4.0.0-rc.1/vuex.cjs.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="async">异步操作</button>
+    <p>{{this.$store.state.count}}</p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        count: 0
+      },
+      mutations: {
+        receive(state) {
+          setTimeout(function () {
+            state.count++
+          }, 1000)
+        }
+      }
+    });
+    const vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        async () {
+          this.$store.commit('receive')
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
